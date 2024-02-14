@@ -3,6 +3,7 @@ import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 import Select from "./ui/select";
 import prisma from "@/lib/prisma";
+import { Button } from "./ui/button";
 
 async function filterJobs(formData: FormData) {
   "use server";
@@ -53,6 +54,18 @@ export default async function JobFilterSidebar() {
               ))}
             </Select>
           </div>
+          <div className="flex items-center gap-2">
+            <input
+              id="remote"
+              name="remote"
+              type="checkbox"
+              className="scale-125 accent-black"
+            />
+            <Label htmlFor="remote">Remote Jobs</Label>
+          </div>
+          <Button type="submit" className="w-full">
+            Filter Jobs
+          </Button>
         </div>
       </form>
     </aside>
