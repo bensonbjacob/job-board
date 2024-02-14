@@ -1,3 +1,4 @@
+import JobListItem from "@/components/JobListItem";
 import prisma from "@/lib/prisma";
 
 export default async function Home() {
@@ -7,5 +8,7 @@ export default async function Home() {
     },
     orderBy: { createdAt: "desc" },
   });
-  return <main>{JSON.stringify(jobs)}</main>;
+  return (
+    <main>{jobs?.map((job) => <JobListItem key={job.id} job={job} />)}</main>
+  );
 }
