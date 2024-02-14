@@ -1,3 +1,4 @@
+import { jobTypes } from "@/lib/job-types";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 import Select from "./ui/select";
@@ -29,6 +30,17 @@ export default async function JobFilterSidebar() {
           <div className="flex flex-col gap-2">
             <Label htmlFor="q">Search</Label>
             <Input id="q" name="q" placeholder="Title, company, etc" />
+          </div>
+          <div className="flex flex-col gap-2">
+            <Label htmlFor="type">Type</Label>
+            <Select id="type" name="type" defaultValue="">
+              <option value="">All Types</option>
+              {jobTypes.map((type) => (
+                <option key={type} value={type}>
+                  {type}
+                </option>
+              ))}
+            </Select>
           </div>
           <div className="flex flex-col gap-2">
             <Label htmlFor="location">Location</Label>
