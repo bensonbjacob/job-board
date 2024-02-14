@@ -1,7 +1,19 @@
+import { JobFilterValues } from "@/lib/validation";
 import JobListItem from "./JobListItem";
 import prisma from "@/lib/prisma";
 
-export default async function JobResults() {
+interface JobResultsProps {
+  filterValues: JobFilterValues;
+}
+
+export default async function JobResults({
+  filterValues: { q, type, location, remote },
+}: JobResultsProps) {
+  const searchString = q
+    ?.split(" ")
+    .filter((word) => word.length > 0)
+    .join(" & ");
+
   const jobs = await prisma?.job.findMany({
     where: {
       approved: true,
