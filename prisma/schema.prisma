@@ -31,3 +31,18 @@ model Job {
 
   @@map("jobs")
 }
+
+// Model for Evento Project
+model EventoEvent {
+  id            Int      @id @default(autoincrement())
+  name          String
+  slug          String   @unique
+  city          String
+  location      String
+  date          DateTime
+  organizerName String
+  imageUrl      String
+  description   String
+  createAt      DateTime @default(now())
+  updateAt      DateTime @updatedAt
+}
