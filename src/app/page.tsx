@@ -31,7 +31,7 @@ export default async function Home({
       </div>
       <section className="flex flex-col gap-4 md:flex-row">
         <JobFilterSidebar />
-        <JobResults />
+        <JobResults filterValues={filterValues} />
       </section>
     </main>
   );
