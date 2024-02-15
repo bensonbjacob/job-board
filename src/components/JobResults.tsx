@@ -45,6 +45,12 @@ export default async function JobResults({
   return (
     <div className="grow space-y-4">
       {jobs?.map((job) => <JobListItem key={job.id} job={job} />)}
+
+      {jobs?.length === 0 && (
+        <p className="m-auto text-center">
+          No jobs found for the selected filters.
+        </p>
+      )}
     </div>
   );
 }
