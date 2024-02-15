@@ -14,7 +14,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "@/components/ui/input";
 import Select from "@/components/ui/select";
-import { jobTypes } from "@/lib/job-types";
+import { jobTypes, locationTypes } from "@/lib/job-types";
 
 export default function NewJobForm() {
   const form = useForm<CreateJobValues>({
@@ -74,7 +74,7 @@ export default function NewJobForm() {
               name="type"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel htmlFor="title">Job type</FormLabel>
+                  <FormLabel htmlFor="type">Job type</FormLabel>
                   <FormControl>
                     <Select {...field} defaultValue="">
                       <option value="" hidden>
@@ -83,6 +83,61 @@ export default function NewJobForm() {
                       {jobTypes.map((jobType) => (
                         <option key={jobType} value={jobType}>
                           {jobType}
+                        </option>
+                      ))}
+                    </Select>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={control}
+              name="companyName"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel htmlFor="companyName">Company</FormLabel>
+                  <FormControl>
+                    <Input placeholder="" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={control}
+              name="companyLogo"
+              render={({ field: { value, ...fieldValues } }) => (
+                <FormItem>
+                  <FormLabel htmlFor="title">Company Logo</FormLabel>
+                  <FormControl>
+                    <Input
+                      type="file"
+                      accept="image/*"
+                      onChange={(e) => {
+                        const file = e.target.files?.[0];
+                        fieldValues.onChange(file);
+                      }}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={control}
+              name="locationType"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel htmlFor="location">Location Type</FormLabel>
+                  <FormControl>
+                    <Select {...field} defaultValue="">
+                      <option value="" hidden>
+                        Select location type
+                      </option>
+                      {locationTypes.map((locationType) => (
+                        <option key={locationType} value={locationType}>
+                          {locationType}
                         </option>
                       ))}
                     </Select>
