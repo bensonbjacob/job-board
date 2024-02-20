@@ -207,11 +207,14 @@ export default function NewJobForm() {
                   render={({ field }) => (
                     <FormItem className="grow">
                       <FormControl>
-                        <Input placeholder="Website" type="url" {...field}
-                        onChange={(e) => {
-                          field.onChange(e)
-                          trigger("applicationEmail")
-                        }
+                        <Input
+                          placeholder="Website"
+                          type="url"
+                          {...field}
+                          onChange={(e) => {
+                            field.onChange(e);
+                            trigger("applicationEmail");
+                          }}
                         />
                       </FormControl>
                       <FormMessage />
