@@ -18,6 +18,7 @@ import { jobTypes, locationTypes } from "@/lib/job-types";
 import LocationInput from "@/components/LocationInput";
 import { X } from "lucide-react";
 import { Label } from "@/components/ui/label";
+import RichTextEditor from "@/components/RichTextEditor";
 
 export default function NewJobForm() {
   const form = useForm<CreateJobValues>({
@@ -223,6 +224,19 @@ export default function NewJobForm() {
                 />
               </div>
             </div>
+            <FormField
+              control={control}
+              name="description"
+              render={({ field }) => (
+                <FormItem>
+                  <Label>Description</Label>
+                  <FormControl>
+                    <RichTextEditor {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
           </form>
         </Form>
       </div>
