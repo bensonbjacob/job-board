@@ -45,7 +45,15 @@ export default forwardRef<HTMLInputElement, LocationInputProps>(
           <div className="absolute z-20 w-full divide-y rounded-b-lg border-x border-b bg-background shadow-xl">
             {!cities.length && <p className="p-3">No results found.</p>}
             {cities.map((city) => (
-              <button className="block w-full p-2 text-start" key={city}>
+              <button
+                className="block w-full p-2 text-start"
+                onMouseDown={(e) => {
+                  e.preventDefault();
+                  onLocationSelected(city);
+                  setLocationSearchInput("");
+                }}
+                key={city}
+              >
                 {city}
               </button>
             ))}
