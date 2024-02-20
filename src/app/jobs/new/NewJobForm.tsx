@@ -38,7 +38,7 @@ export default function NewJobForm() {
   } = form;
 
   async function onSubmit(values: CreateJobValues) {
-    console.log(values);
+    alert(JSON.stringify(values, null, 2));
   }
 
   return (
