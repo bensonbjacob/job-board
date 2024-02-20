@@ -20,6 +20,7 @@ import { X } from "lucide-react";
 import { Label } from "@/components/ui/label";
 import RichTextEditor from "@/components/RichTextEditor";
 import { draftToMarkdown } from "markdown-draft-js";
+import LoadingButton from "@/components/LoadingButton";
 
 export default function NewJobForm() {
   const form = useForm<CreateJobValues>({
@@ -235,7 +236,9 @@ export default function NewJobForm() {
                   </Label>
                   <FormControl>
                     <RichTextEditor
-                      onChange={(draft) => draftToMarkdown(draft)}
+                      onChange={(draft) =>
+                        field.onChange(draftToMarkdown(draft))
+                      }
                       ref={field.ref}
                     />
                   </FormControl>
@@ -256,6 +259,9 @@ export default function NewJobForm() {
                 </FormItem>
               )}
             />
+            <LoadingButton type="submit" loading={isSubmitting}>
+              Submit
+            </LoadingButton>
           </form>
         </Form>
       </div>
