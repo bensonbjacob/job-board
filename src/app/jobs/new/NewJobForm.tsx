@@ -17,6 +17,7 @@ import Select from "@/components/ui/select";
 import { jobTypes, locationTypes } from "@/lib/job-types";
 import LocationInput from "@/components/LocationInput";
 import { X } from "lucide-react";
+import { Label } from "@/components/ui/label";
 
 export default function NewJobForm() {
   const form = useForm<CreateJobValues>({
@@ -177,6 +178,27 @@ export default function NewJobForm() {
                 </FormItem>
               )}
             />
+            <div className="space-y-2">
+              <Label htmlFor="applicationEmail">How to apply</Label>
+              <div>
+                <FormField
+                  control={control}
+                  name="applicationEmail"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormControl>
+                        <Input
+                          id="applicationEmail"
+                          placeholder="Email"
+                          type="email"
+                          {...field}
+                        />
+                      </FormControl>
+                    </FormItem>
+                  )}
+                />
+              </div>
+            </div>
           </form>
         </Form>
       </div>
