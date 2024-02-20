@@ -180,20 +180,36 @@ export default function NewJobForm() {
             />
             <div className="space-y-2">
               <Label htmlFor="applicationEmail">How to apply</Label>
-              <div>
+              <div className="flex justify-between">
                 <FormField
                   control={control}
                   name="applicationEmail"
                   render={({ field }) => (
-                    <FormItem>
+                    <FormItem className="grow">
                       <FormControl>
-                        <Input
-                          id="applicationEmail"
-                          placeholder="Email"
-                          type="email"
-                          {...field}
-                        />
+                        <div className="flex items-center">
+                          <Input
+                            id="applicationEmail"
+                            placeholder="Email"
+                            type="email"
+                            {...field}
+                          />
+                          <span className="mx-2">or</span>
+                        </div>
                       </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={control}
+                  name="applicationUrl"
+                  render={({ field }) => (
+                    <FormItem className="grow">
+                      <FormControl>
+                        <Input placeholder="Website" type="url" {...field} />
+                      </FormControl>
+                      <FormMessage />
                     </FormItem>
                   )}
                 />
