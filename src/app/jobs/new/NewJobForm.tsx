@@ -21,7 +21,6 @@ import { Label } from "@/components/ui/label";
 import RichTextEditor from "@/components/RichTextEditor";
 import { draftToMarkdown } from "markdown-draft-js";
 import LoadingButton from "@/components/LoadingButton";
-import { create } from "domain";
 import { createJobPosting } from "./actions";
 
 export default function NewJobForm() {
