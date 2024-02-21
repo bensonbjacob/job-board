@@ -137,7 +137,16 @@ export default function NewJobForm() {
                 <FormItem>
                   <FormLabel htmlFor="locationType">Location Type</FormLabel>
                   <FormControl>
-                    <Select {...field} defaultValue="">
+                    <Select
+                      {...field}
+                      defaultValue=""
+                      onChange={(e) => {
+                        field.onChange(e);
+                        if (e.currentTarget.value === "Remote") {
+                          trigger("location");
+                        }
+                      }}
+                    >
                       <option value="" hidden>
                         Select location type
                       </option>
