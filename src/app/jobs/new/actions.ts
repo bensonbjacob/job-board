@@ -6,6 +6,7 @@ import { nanoid } from "nanoid";
 import { put } from "@vercel/blob";
 import path, { parse } from "path";
 import prisma from "@/lib/prisma";
+import { redirect } from "next/navigation";
 
 export async function createJobPosting(formData: FormData) {
   const values = Object.fromEntries(formData.entries());
@@ -55,4 +56,6 @@ export async function createJobPosting(formData: FormData) {
       salary: parseInt(salary),
     },
   });
+
+  redirect("/job-submitted");
 }
