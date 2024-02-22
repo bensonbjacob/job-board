@@ -3,6 +3,7 @@ import prisma from "@/lib/prisma";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import JobPage from "@/components/JobPage";
+import { Button } from "@/components/ui/button";
 
 interface PageProps {
   params: {
@@ -32,9 +33,28 @@ export async function generateMetaData(): Promise<Metadata> {
 
 export default async function Page({ params: { slug } }: PageProps) {
   const job = await getJob(slug);
+
+  const { applicationEmail, applicationUrl } = job;
+
+  const applicationLink = applicationEmail
+    ? `mailto:${applicationEmail}`
+    : applicationUrl;
+
+  if (!applicationLink) {
+    console.log("No application link found for job", job.id);
+    notFound();
+  }
+
   return (
     <main className="m-auto my-10 flex max-w-5xl flex-col items-center gap-5 px-3 md:flex-row md:items-start">
       <JobPage job={job} />
+      <aside>
+        <Button asChild>
+          <a href={applicationLink} className="w-40 md:w-fit">
+            Apply now
+          </a>
+        </Button>
+      </aside>
     </main>
   );
 }
