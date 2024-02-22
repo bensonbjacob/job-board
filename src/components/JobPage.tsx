@@ -70,7 +70,7 @@ export default function JobPage({
           </div>
         </div>
       </div>
-      <div></div>
+      <div>{description}</div>
     </section>
   );
 }
