@@ -4,6 +4,7 @@ import { Briefcase, MapPin, Globe2, Banknote, Clock } from "lucide-react";
 import { Span } from "next/dist/trace";
 import Image from "next/image";
 import Link from "next/link";
+import Markdown from "./Markdown";
 
 interface JobPageProps {
   job: Job;
@@ -70,7 +71,7 @@ export default function JobPage({
           </div>
         </div>
       </div>
-      <div>{description}</div>
+      <div>{description && <Markdown>{description}</Markdown>}</div>
     </section>
   );
 }
