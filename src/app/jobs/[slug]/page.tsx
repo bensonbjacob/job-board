@@ -2,6 +2,7 @@ import { cache } from "react";
 import prisma from "@/lib/prisma";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
+import JobPage from "@/components/JobPage";
 
 interface PageProps {
   params: {
@@ -32,6 +33,8 @@ export async function generateMetaData(): Promise<Metadata> {
 export default async function Page({ params: { slug } }: PageProps) {
   const job = await getJob(slug);
   return (
-    <main className="m-auto my-10 flex max-w-5xl flex-col items-center gap-5 md:flex-row md:items-start"></main>
+    <main className="m-auto my-10 flex max-w-5xl flex-col items-center gap-5 md:flex-row md:items-start">
+      <JobPage job={job} />
+    </main>
   );
 }
