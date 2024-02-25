@@ -20,6 +20,9 @@ export default async function AdminPage() {
             <JobListItem job={job} />
           </Link>
         ))}
+        {unapprovedJobs.length === 0 && (
+          <p className="text-muted-foreground">No unapproved jobs</p>
+        )}
       </section>
     </main>
   );
