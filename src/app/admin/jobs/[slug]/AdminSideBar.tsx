@@ -1,5 +1,9 @@
+"use client";
+
 import FormSubmitButton from "@/components/FormSubmitButton";
 import { Job } from "@prisma/client";
+import { useFormState } from "react-dom";
+import { approveSubmission } from "../../actions";
 
 interface AdminSideBarProps {
   job: Job;
@@ -24,12 +28,17 @@ interface AdminButtonProps {
 }
 
 function ApproveSubmissionButton({ jobId }: AdminButtonProps) {
+  const [formState, formAction] = useFormState(approveSubmission, undefined);
+
   return (
-    <form>
+    <form action={formAction} className="space-y-1">
       <input type="hidden" name="jobId" value={jobId} />
       <FormSubmitButton className="w-full bg-green-500 hover:bg-gray-600">
         Approve
       </FormSubmitButton>
+      {formState?.error && (
+        <p className="text-sm text-red-500">{formState.error}</p>
+      )}
     </form>
   );
 }
