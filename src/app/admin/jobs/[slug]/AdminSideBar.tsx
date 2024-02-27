@@ -3,7 +3,7 @@
 import FormSubmitButton from "@/components/FormSubmitButton";
 import { Job } from "@prisma/client";
 import { useFormState } from "react-dom";
-import { approveSubmission, deleteJob } from "../../actions";
+import { approveSubmission, deleteJob } from "./actions";
 
 interface AdminSideBarProps {
   job: Job;
