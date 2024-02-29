@@ -1,10 +1,10 @@
-import { JobFilterValues } from "@/lib/validation";
-import JobListItem from "./JobListItem";
 import prisma from "@/lib/prisma";
-import { Prisma } from "@prisma/client";
-import Link from "next/link";
-import { ArrowLeft, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { JobFilterValues } from "@/lib/validation";
+import { Prisma } from "@prisma/client";
+import { ArrowLeft, ArrowRight } from "lucide-react";
+import Link from "next/link";
+import JobListItem from "./JobListItem";
 
 interface JobResultsProps {
   filterValues: JobFilterValues;
@@ -17,7 +17,7 @@ export default async function JobResults({
 }: JobResultsProps) {
   const { q, type, location, remote } = filterValues;
 
-  const jobsPerPage = 6;
+  const jobsPerPage = 4;
   const skip = (page - 1) * jobsPerPage;
 
   const searchString = q
@@ -47,7 +47,7 @@ export default async function JobResults({
     ],
   };
 
-  const jobsPromise = prisma?.job.findMany({
+  const jobsPromise = prisma.job.findMany({
     where,
     orderBy: { createdAt: "desc" },
     take: jobsPerPage,
@@ -60,15 +60,14 @@ export default async function JobResults({
 
   return (
     <div className="grow space-y-4">
-      {jobs?.map((job) => (
-        <Link href={`/jobs/${job.slug}`} key={job.id} className="block">
+      {jobs.map((job) => (
+        <Link key={job.id} href={`/jobs/${job.slug}`} className="block">
           <JobListItem job={job} />
         </Link>
       ))}
-
-      {jobs?.length === 0 && (
+      {jobs.length === 0 && (
         <p className="m-auto text-center">
-          No jobs found for the selected filters.
+          No jobs found. Try adjusting your search filters.
         </p>
       )}
       {jobs.length > 0 && (

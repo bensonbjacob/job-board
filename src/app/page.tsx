@@ -1,9 +1,7 @@
 import JobFilterSidebar from "@/components/JobFilterSidebar";
-import JobListItem from "@/components/JobListItem";
 import JobResults from "@/components/JobResults";
 import H1 from "@/components/ui/h1";
 import { JobFilterValues } from "@/lib/validation";
-import { get } from "http";
 import { Metadata } from "next";
 
 interface PageProps {
@@ -12,6 +10,7 @@ interface PageProps {
     type?: string;
     location?: string;
     remote?: string;
+    page?: string;
   };
 }
 
@@ -29,16 +28,21 @@ function getTitle({ q, type, location, remote }: JobFilterValues) {
   return `${titlePrefix}${titleSuffix}`;
 }
 
-export function generateMetaData({
+export function generateMetadata({
   searchParams: { q, type, location, remote },
 }: PageProps): Metadata {
   return {
-    title: `${getTitle({ q, type, location, remote: remote === "true" })} | Flow Jobs`,
+    title: `${getTitle({
+      q,
+      type,
+      location,
+      remote: remote === "true",
+    })} | Flow Jobs`,
   };
 }
 
 export default async function Home({
-  searchParams: { q, type, location, remote },
+  searchParams: { q, type, location, remote, page },
 }: PageProps) {
   const filterValues: JobFilterValues = {
     q,
@@ -51,11 +55,14 @@ export default async function Home({
     <main className="m-auto my-10 max-w-5xl space-y-10 px-3">
       <div className="space-y-5 text-center">
         <H1>{getTitle(filterValues)}</H1>
-        <p className="text-muted-foreground">Find NextJS jobs</p>
+        <p className="text-muted-foreground">Find your dream job.</p>
       </div>
       <section className="flex flex-col gap-4 md:flex-row">
         <JobFilterSidebar defaultValues={filterValues} />
-        <JobResults filterValues={filterValues} />
+        <JobResults
+          filterValues={filterValues}
+          page={page ? parseInt(page) : undefined}
+        />
       </section>
     </main>
   );
