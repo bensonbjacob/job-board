@@ -1,21 +1,17 @@
-import { cache } from "react";
-import prisma from "@/lib/prisma";
-import { notFound } from "next/navigation";
-import { Metadata } from "next";
 import JobPage from "@/components/JobPage";
 import { Button } from "@/components/ui/button";
+import prisma from "@/lib/prisma";
+import { Metadata } from "next";
+import { notFound } from "next/navigation";
+import { cache } from "react";
 
 interface PageProps {
-  params: {
-    slug: string;
-  };
+  params: { slug: string };
 }
 
 const getJob = cache(async (slug: string) => {
   const job = await prisma.job.findUnique({
-    where: {
-      slug,
-    },
+    where: { slug },
   });
 
   if (!job) notFound();
@@ -25,19 +21,17 @@ const getJob = cache(async (slug: string) => {
 
 export async function generateStaticParams() {
   const jobs = await prisma.job.findMany({
-    where: {
-      approved: true,
-    },
-    select: {
-      slug: true,
-    },
+    where: { approved: true },
+    select: { slug: true },
   });
 
   return jobs.map(({ slug }) => slug);
 }
 
-export async function generateMetaData(): Promise<Metadata> {
-  const job = await getJob("slug");
+export async function generateMetadata({
+  params: { slug },
+}: PageProps): Promise<Metadata> {
+  const job = await getJob(slug);
 
   return {
     title: job.title,
@@ -54,7 +48,7 @@ export default async function Page({ params: { slug } }: PageProps) {
     : applicationUrl;
 
   if (!applicationLink) {
-    console.log("No application link found for job", job.id);
+    console.error("Job has no application link or email");
     notFound();
   }
 
