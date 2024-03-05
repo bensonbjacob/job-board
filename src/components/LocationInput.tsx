@@ -18,7 +18,6 @@ export default forwardRef<HTMLInputElement, LocationInputProps>(
       const searchWords = locationSearchInput.split(" ");
 
       return citiesList
-        .map((city) => `${city.name}, ${city.subcountry}, ${city.country}`)
         .filter(
           (city) =>
             city.toLowerCase().startsWith(searchWords[0].toLowerCase()) &&
