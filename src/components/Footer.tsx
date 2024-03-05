@@ -27,9 +27,11 @@ export default function Footer() {
           </div>
         </div>
         <div className="text-center text-sm text-muted-foreground">
-          © {new Date().getFullYear()}
-          <a href="https://www.jacobbenson.dev/">Jacob Benson</a> All rights
-          reserved.
+          © {new Date().getFullYear()}{" "}
+          <a href="https://www.jacobbenson.dev/" className="underline">
+            Jacob Benson
+          </a>{" "}
+          All rights reserved.
         </div>
       </div>
     </footer>
