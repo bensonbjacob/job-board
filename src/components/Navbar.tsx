@@ -10,7 +10,7 @@ export default function Navbar() {
         <Link href="/" className="flex items-center gap-3">
           <Image src={logo} alt="Developer Jobs Logo" width={40} height={40} />
           <span className="text-xl font-bold tracking-tight">
-            Developer Jobs
+            Yellowhammer Tech Jobs
           </span>
         </Link>
         <Button asChild>
