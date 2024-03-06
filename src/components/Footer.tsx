@@ -12,18 +12,18 @@ export default function Footer() {
             </p>
           </div>
           <div className="flex flex-wrap gap-5 text-sm text-muted-foreground">
-            <Link href="/about" className="hover:underline">
+            {/* <Link href="/about" className="hover:underline">
               About Us
-            </Link>
-            <Link href="/contact" className="hover:underline">
+            </Link> */}
+            <a href="https://www.jacobbenson.dev/" className="hover:underline">
               Contact
-            </Link>
-            <Link href="/terms" className="hover:underline">
+            </a>
+            {/* <Link href="/terms" className="hover:underline">
               Terms of Service
             </Link>
             <Link href="/privacy" className="hover:underline">
               Privacy Policy
-            </Link>
+            </Link> */}
           </div>
         </div>
         <div className="text-center text-sm text-muted-foreground">
